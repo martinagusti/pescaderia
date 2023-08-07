@@ -26,9 +26,7 @@ const updatePointsOfSale = async (req, res) => {
 
     const point = await findPointsByName(name);
 
-    console.log(point.ID);
-
-    if (point.ID != id && point.name === name) {
+    if (point?.ID != id && point?.name === name) {
       throwJsonError("409", `El nombre ${name} ya ha sido utilizado`);
     }
 

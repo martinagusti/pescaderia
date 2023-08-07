@@ -42,6 +42,7 @@ const createProvider = async (req, res) => {
     const newProvider = await createNewProvider(data);
 
     if (newProvider.affectedRows === 1) {
+      data.ID = newProvider.insertId;
       res.status(201);
       res.send([data]);
     } else {

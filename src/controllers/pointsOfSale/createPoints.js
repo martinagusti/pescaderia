@@ -32,7 +32,7 @@ const createPointsOfSale = async (req, res) => {
 
     const date = new Date();
 
-    const data = {
+    let data = {
       name,
       address,
       postalCode,
@@ -45,6 +45,7 @@ const createPointsOfSale = async (req, res) => {
     console.log(newPoint);
 
     if (newPoint.affectedRows === 1) {
+      data.ID = newPoint.insertId;
       res.status(201);
       res.send([data]);
     } else {
