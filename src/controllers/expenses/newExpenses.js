@@ -5,44 +5,45 @@ const Joi = require("joi");
 const { createNewExpense } = require("../../repositories/expensesRepositories");
 
 const schema = Joi.object().keys({
-  idPointsOfSale: Joi.number().positive().integer().required(),
+  idPoint: Joi.number().positive().integer().required(),
   idProvider: Joi.number().positive().integer().required(),
   expenseDate: Joi.date().required(),
   code: Joi.string(),
   amount: Joi.number().positive().required(),
   concept: Joi.string(),
   status: Joi.valid("pagado", "no pagado"),
-  payDate: Joi.date(),
+  paydate: Joi.date().allow("").allow(null),
 });
 
 const newExpenses = async (req, res) => {
   try {
     const { body } = req;
+    console.log(body);
 
     await schema.validateAsync(body);
 
     const {
-      idPointsOfSale,
+      idPoint,
       idProvider,
       expenseDate,
       code,
       amount,
       concept,
       status,
-      payDate,
+      paydate,
     } = body;
 
     const date = new Date();
 
     const data = {
-      idPointsOfSale,
+      idPoint,
       idProvider,
       expenseDate,
       code,
       amount,
       concept,
       status,
-      payDate,
+      paydate,
       date,
     };
 

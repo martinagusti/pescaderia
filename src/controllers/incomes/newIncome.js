@@ -35,6 +35,7 @@ const newIncome = async (req, res) => {
     console.log(newIncome);
 
     if (newIncome.affectedRows === 1) {
+      data.id = newIncome.insertId;
       res.status(201);
       res.send([data]);
     } else {

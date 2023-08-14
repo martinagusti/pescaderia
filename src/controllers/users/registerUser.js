@@ -48,6 +48,7 @@ const registerUser = async (req, res) => {
 
     const userId = await createUser(userDB);
 
+    console.log(userId);
     res.status(201);
     res.send([userDB]);
   } catch (error) {

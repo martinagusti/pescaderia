@@ -2,7 +2,7 @@ const { getConnection } = require("../infraestructure/database");
 
 const findExpenses = async () => {
   const pool = await getConnection();
-  const sql = `SELECT *  FROM expenses `;
+  const sql = `SELECT expenses.*, providers.name as providerName, pointsofsale.name as pointName FROM pescaderia.expenses left join providers on providers.id = expenses.idProvider left join pointsofsale on pointsofsale.id = expenses.idPointOfSale `;
   const [expenses] = await pool.query(sql);
 
   return expenses;
@@ -10,36 +10,37 @@ const findExpenses = async () => {
 
 const createNewExpense = async (data) => {
   const {
-    idPointsOfSale,
+    idPoint,
     idProvider,
     expenseDate,
     code,
     amount,
     concept,
     status,
-    payDate,
+    paydate,
     date,
   } = data;
 
   const pool = await getConnection();
-  const sql = `INSERT INTO expenses ( idPointsOfSale,
+  const sql = `INSERT INTO expenses ( 
+    idPointOfSale,
     idProvider,
     expenseDate,
     code,
     amount,
     concept,
     status,
-    payDate,
+    paydate,
     date) VALUES (?,?,?,?,?,?,?,?,?) `;
   const [expenses] = await pool.query(sql, [
-    idPointsOfSale,
+    idPoint,
     idProvider,
     expenseDate,
     code,
     amount,
     concept,
     status,
-    payDate,
+    paydate,
     date,
   ]);
 
@@ -54,7 +55,7 @@ const deleteExpenseRepository = async (id) => {
   return deleted;
 };
 
-const updateNewExpense = async (data) => {
+const updateNewExpense = async (data, id) => {
   const {
     idPointsOfSale,
     idProvider,
@@ -63,15 +64,15 @@ const updateNewExpense = async (data) => {
     amount,
     concept,
     status,
-    payDate,
+    paydate,
   } = data;
 
   const pool = await getConnection();
-  const sql = `UPDATE expenses SET idPointsOfSale = ?, idProvider = ?, expenseDate = ?, code = ?,
+  const sql = `UPDATE expenses SET idPointOfSale = ?, idProvider = ?, expenseDate = ?, code = ?,
   amount = ?,
   concept = ?,
   status = ?,
-  payDate = ?`;
+  payDate = ? WHERE id = ?`;
   const [expenses] = await pool.query(sql, [
     idPointsOfSale,
     idProvider,
@@ -80,10 +81,19 @@ const updateNewExpense = async (data) => {
     amount,
     concept,
     status,
-    payDate,
+    paydate,
+    id,
   ]);
 
   return expenses;
+};
+
+const updateExpenseFileRepository = async (name, id) => {
+  const pool = await getConnection();
+  const sql = `UPDATE expenses SET document = ? WHERE id = ?`;
+  const [updated] = await pool.query(sql, [name, id]);
+
+  return updated;
 };
 
 module.exports = {
@@ -91,4 +101,5 @@ module.exports = {
   createNewExpense,
   deleteExpenseRepository,
   updateNewExpense,
+  updateExpenseFileRepository,
 };

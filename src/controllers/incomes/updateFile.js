@@ -12,7 +12,7 @@ const updateFile = async (req, res) => {
 
     const document = req.file;
 
-    const updated = await updateFileRepository(document.filename);
+    const updated = await updateFileRepository(document.filename, id);
 
     if (updated.affectedRows === 0) {
       throwJsonError("400", `Se produjo un error...`);

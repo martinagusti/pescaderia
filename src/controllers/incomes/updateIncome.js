@@ -19,6 +19,8 @@ const updateIncome = async (req, res) => {
 
     const { id } = req.params;
 
+    console.log(body);
+
     await schema.validateAsync(body);
 
     const { idPointsOfSale, amount, type, concept } = body;

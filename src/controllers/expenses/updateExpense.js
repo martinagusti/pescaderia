@@ -12,12 +12,16 @@ const schema = Joi.object().keys({
   amount: Joi.number().positive().required(),
   concept: Joi.string(),
   status: Joi.valid("pagado", "no pagado"),
-  payDate: Joi.date(),
+  paydate: Joi.date(),
 });
 
 const updateExpense = async (req, res) => {
   try {
     const { body } = req;
+
+    const { id } = req.params;
+
+    console.log(body);
 
     await schema.validateAsync(body);
 
@@ -29,10 +33,10 @@ const updateExpense = async (req, res) => {
       amount,
       concept,
       status,
-      payDate,
+      paydate,
     } = body;
 
-    const date = new Date();
+    console.log(idPointsOfSale);
 
     const data = {
       idPointsOfSale,
@@ -42,19 +46,18 @@ const updateExpense = async (req, res) => {
       amount,
       concept,
       status,
-      payDate,
-      date,
+      paydate,
     };
 
-    const updateExpense = await updateNewExpense(data);
+    const updateExpense = await updateNewExpense(data, id);
 
     console.log(updateExpense);
 
     if (updateExpense.affectedRows === 1) {
-      res.status(201);
+      res.status(200);
       res.send([data]);
     } else {
-      throwJsonError("400", `Error al crear un nuevo ingreso`);
+      throwJsonError("400", `Error al guardar los cambios`);
     }
   } catch (error) {
     createJsonError(error, res);

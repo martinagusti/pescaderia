@@ -32,10 +32,10 @@ const deleteIncomeRepository = async (id) => {
   return deleted;
 };
 
-const updateFileRepository = async (name) => {
+const updateFileRepository = async (name, id) => {
   const pool = await getConnection();
-  const sql = `UPDATE income SET document = ? WHERE id = 4`;
-  const [updated] = await pool.query(sql, [name]);
+  const sql = `UPDATE income SET document = ? WHERE id = ?`;
+  const [updated] = await pool.query(sql, [name, id]);
 
   return updated;
 };

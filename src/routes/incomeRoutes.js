@@ -11,17 +11,23 @@ const updateIncome = require("../controllers/incomes/updateIncome");
 
 const incomeRoutes = express.Router();
 
+const date = new Date();
+
 const storage = multer.diskStorage({
-  destination: "uploads/",
+  destination: "public/incomeFiles",
   filename: function (req, file, cb) {
-    cb("", Date.now() + file.originalname);
+    cb(
+      "",
+      `${date.getDate()}${date.getMonth() + 1}${date.getFullYear()}` +
+        file.originalname
+    );
   },
 });
 
 const upload = multer({
   storage: storage,
 });
-
+/* C:\Users\Usuario\Documents\OnlineValles\Peixateria Riembau\Peixateria Backend\public\incomeFiles\1691524766037Certificate.pdf */
 //endpoints publicos
 
 //endpoints privados
@@ -31,11 +37,7 @@ incomeRoutes.route("/update/:id").all(validateAuth).patch(updateFile);
 incomeRoutes.route("/delete/:id").all(validateAuth).delete(deleteIncome);
 incomeRoutes.route("/updateIncome/:id").all(validateAuth).patch(updateIncome);
 
-incomeRoutes.route("/files").post(upload.single("avatar"), updateFile);
-/* incomeRoutes
-  .route("/files", upload.single("avatar"))
-  .all(validateAuth)
-  .post(insertFile); */
+incomeRoutes.route("/files/:id").post(upload.single("avatar"), updateFile);
 
 module.exports = {
   incomeRoutes,
