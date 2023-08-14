@@ -20,7 +20,7 @@ const createUser = async (userDB) => {
   const { name, email, passwordHash, date } = userDB;
 
   const pool = await getConnection();
-  const sql = `INSERT INTO USERS (name, email, password, date) VALUES ( ?, ?, ?, ?);`;
+  const sql = `INSERT INTO users (name, email, password, date) VALUES ( ?, ?, ?, ?);`;
   const [created] = await pool.query(sql, [name, email, passwordHash, date]);
   console.log(created);
   return created.insertId;
