@@ -2,7 +2,7 @@ const { getConnection } = require("../infraestructure/database");
 
 const findExpenses = async () => {
   const pool = await getConnection();
-  const sql = `SELECT expenses.*, providers.name as providerName, pointsofsale.name as pointName FROM pescaderia.expenses left join providers on providers.id = expenses.idProvider left join pointsofsale on pointsofsale.id = expenses.idPointOfSale `;
+  const sql = `SELECT expenses.*, providers.name as providerName, pointsofsale.name as pointName FROM expenses left join providers on providers.id = expenses.idProvider left join pointsofsale on pointsofsale.id = expenses.idPointOfSale `;
   const [expenses] = await pool.query(sql);
 
   return expenses;

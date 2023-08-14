@@ -2,7 +2,7 @@ const { getConnection } = require("../infraestructure/database");
 
 const findIncomes = async () => {
   const pool = await getConnection();
-  const sql = `SELECT income.*, pointsofsale.name FROM pescaderia.income left join pointsofsale on pointsofsale.id = income.IdpointsOfSale `;
+  const sql = `SELECT income.*, pointsofsale.name FROM income left join pointsofsale on pointsofsale.id = income.IdpointsOfSale `;
   const [incomes] = await pool.query(sql);
 
   return incomes;
