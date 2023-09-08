@@ -39,6 +39,8 @@ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 idPointsOfSale INT UNSIGNED NOT NULL,
 amount decimal NOT NULL,
 type ENUM ("efectivo", "tarjeta", "transferencia") NOT NULL,
+concept VARCHAR(150),
+document VARCHAR(200),
 date DATE NOT NULL,
 FOREIGN KEY(idPointsOfSale) REFERENCES pointsofsale(id)
 ON DELETE CASCADE
