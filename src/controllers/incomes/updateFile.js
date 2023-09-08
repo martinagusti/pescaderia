@@ -12,6 +12,8 @@ const updateFile = async (req, res) => {
 
     const document = req.file;
 
+    console.log(document);
+
     const updated = await updateFileRepository(document.filename, id);
 
     if (updated.affectedRows === 0) {

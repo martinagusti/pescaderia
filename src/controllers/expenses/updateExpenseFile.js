@@ -10,6 +10,8 @@ const updateExpenseFile = async (req, res) => {
 
     const document = req.file;
 
+    console.log(document);
+
     const updated = await updateExpenseFileRepository(document.filename, id);
 
     if (updated.affectedRows === 0) {
