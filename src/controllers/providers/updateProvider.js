@@ -33,10 +33,14 @@ const updateProvider = async (req, res) => {
 
     const { name, businessName, cif, address, postalCode, city } = body;
 
-    const providerName = await findProviderByName(name);
+    console.log("*****");
+    console.log(name);
 
-    if (providerName.ID != id) {
-      throwJsonError("409", `El nombre ${name} ya ha sido utilizado`);
+    const providerName = await findProviderByName(name);
+    if (providerName) {
+      if (providerName?.ID != id) {
+        throwJsonError("409", `El nombre ${name} ya ha sido utilizado`);
+      }
     }
 
     console.log(id);

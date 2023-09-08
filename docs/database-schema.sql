@@ -49,16 +49,18 @@ ON DELETE CASCADE
 
 CREATE TABLE expenses(
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-idPointsOfSale INT UNSIGNED NOT NULL,
+idPointOfSale INT UNSIGNED NOT NULL,
 idProvider INT UNSIGNED NOT NULL,
-expenseDate DATE NOT NULL,
+code VARCHAR(200),
 date DATE NOT NULL,
 amount decimal(15,2) NOT NULL,
-status ENUM ("PAGADO", "NO PAGADO"),
+status ENUM ("pagado", "no pagado"),
 paydate DATE NOT NULL,
+concept VARCHAR(150),
+document VARCHAR(200),
 FOREIGN KEY(idProvider) REFERENCES providers(id)
 ON DELETE CASCADE,
-FOREIGN KEY(idPointsOfSale) REFERENCES pointsofsale(id)
+FOREIGN KEY(idPointOfSale) REFERENCES pointsofsale(id)
 ON DELETE CASCADE
 );
 
