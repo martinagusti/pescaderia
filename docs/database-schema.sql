@@ -55,7 +55,7 @@ code VARCHAR(200),
 date DATE NOT NULL,
 amount decimal(15,2) NOT NULL,
 status ENUM ("pagado", "no pagado"),
-paydate DATE NOT NULL,
+paydate DATE,
 concept VARCHAR(150),
 document VARCHAR(200),
 FOREIGN KEY(idProvider) REFERENCES providers(id)
