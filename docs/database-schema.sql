@@ -37,7 +37,7 @@ city varchar(150)
 CREATE TABLE income(
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 idPointsOfSale INT UNSIGNED NOT NULL,
-amount decimal NOT NULL,
+amount decimal(15,2) NOT NULL,
 type ENUM ("efectivo", "tarjeta", "transferencia") NOT NULL,
 concept VARCHAR(150),
 document VARCHAR(200),
@@ -53,7 +53,7 @@ idPointsOfSale INT UNSIGNED NOT NULL,
 idProvider INT UNSIGNED NOT NULL,
 expenseDate DATE NOT NULL,
 date DATE NOT NULL,
-amount decimal NOT NULL,
+amount decimal(15,2) NOT NULL,
 status ENUM ("PAGADO", "NO PAGADO"),
 paydate DATE NOT NULL,
 FOREIGN KEY(idProvider) REFERENCES providers(id)
