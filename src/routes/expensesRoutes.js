@@ -10,11 +10,10 @@ const updateExpenseFile = require("../controllers/expenses/updateExpenseFile");
 
 const expensesRoutes = express.Router();
 
-const date = new Date();
-
 const storage = multer.diskStorage({
   destination: "public/expensesFiles",
   filename: function (req, file, cb) {
+    const date = new Date();
     cb(
       "",
       `${date.getDate()}${date.getMonth() + 1}${date.getFullYear()}` +
