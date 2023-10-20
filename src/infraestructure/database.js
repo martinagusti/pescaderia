@@ -9,11 +9,11 @@ const getConnection = async () => {
   if (!pool) {
     pool = mysql.createPool({
       connectionLimit: 10,
-      host: MYSQL_HOST,
-      user: MYSQL_USER,
-      port: MYSQL_PORT,
-      password: MYSQL_PASSWORD,
-      database: MYSQL_DATABASE,
+      host: "martin.mysql.database.azure.com",
+      user: "martin",
+      port: 3306,
+      password: "$Agustincho20",
+      database: "pescaderia",
       timezone: "Z",
     });
   }
