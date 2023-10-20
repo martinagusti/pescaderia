@@ -42,13 +42,13 @@ const loginUser = async (req, res) => {
       password,
     };
 
-    const token = jwt.sign(tokenPayLoad, JWT_SECRET, {
-      expiresIn: "20d",
+    const token = jwt.sign(tokenPayLoad, "asdf1234", {
+      expiresIn: "1200d",
     });
 
     const response = {
       accesToken: token,
-      expiresIn: "120d",
+      expiresIn: "1200d",
     };
 
     res.status(200);
